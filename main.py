@@ -13,6 +13,7 @@ dsp = pygame.display.set_mode((x, y))
 pygame.display.set_caption('QRFx')
 img_dp = pygame.image.load("qr2.png").convert()
 picture = pygame.transform.scale(img_dp, (x,y))
+im2, contours, hierarchy = cv2.findContours(im_th_gray, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 dsp.blit(picture, (0, 0))
 pygame.display.flip()
 status = True
