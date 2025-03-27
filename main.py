@@ -16,8 +16,9 @@ edges = cv2.Canny(image=image, threshold1=threshold1, threshold2=threshold2)
 cv2.imwrite('qr2.png', edges)
 # try gaussian blur blurred_img = cv2.GaussianBlur(img, (5,5), 0)
 # bilateral filter is maybe what i exactly want. also read about filling contour gaps
+# 3rd smoothing technique, white fill, floodfill.
 # otsu bad 170 b/w
 # https://answers.opencv.org/question/53548/gap-filling-contours-lines/
 # https://stackoverflow.com/questions/26586123/filling-gaps-in-shape-edges
-
+# https://www.reddit.com/r/learnpython/comments/h16htq/how_to_change_all_colors_in_the_image_to_white/
 
