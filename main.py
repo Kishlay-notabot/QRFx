@@ -1,6 +1,7 @@
 import cv2
 import pygame
 import sys
+import numpy as np
 image = cv2.imread('qr.png', cv2.IMREAD_GRAYSCALE)
 threshold1 = int(sys.argv[1]) if len(sys.argv) > 1 else 80
 threshold2 = int(sys.argv[2]) if len(sys.argv) > 2 else 200
@@ -11,7 +12,9 @@ print(th)
 # im_color = cv2.cvtColor(im_th_gray, cv2.COLOR_GRAY2BGR)
 # cv2.drawContours(im_color, contours, -1, (0, 0, 255), 1)
 edges = cv2.Canny(image=image, threshold1=threshold1, threshold2=threshold2)
-cv2.imwrite('qr2.png', edges)
+kernel = np.ones((5,5),np.float32)/25
+dst = cv2.filter2D(edges,-1,kernel)
+cv2.imwrite('qr2.png', dst)
 
 # otsu bad 170 b/w
 # pygame.init()
