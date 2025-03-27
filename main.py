@@ -2,7 +2,7 @@ import cv2
 # import pygame
 import sys
 import numpy as np
-image = cv2.imread('qr.png', cv2.IMREAD_GRAYSCALE)
+image = cv2.imread('qr2.jpeg', cv2.IMREAD_GRAYSCALE)
 threshold1 = int(sys.argv[1]) if len(sys.argv) > 1 else 80
 threshold2 = int(sys.argv[2]) if len(sys.argv) > 2 else 200
 # image_gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
