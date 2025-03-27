@@ -6,8 +6,8 @@ image = cv2.imread('qr.png', cv2.IMREAD_GRAYSCALE)
 threshold1 = int(sys.argv[1]) if len(sys.argv) > 1 else 80
 threshold2 = int(sys.argv[2]) if len(sys.argv) > 2 else 200
 # image_gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-th, im_th_gray = cv2.threshold(image,170,255,cv2.THRESH_BINARY)
-print(th)
+# th, im_th_gray = cv2.threshold(image,170,255,cv2.THRESH_BINARY)
+# print(th)
 # contours, hierarchy = cv2.findContours(im_th_gray, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 # im_color = cv2.cvtColor(im_th_gray, cv2.COLOR_GRAY2BGR)
 # cv2.drawContours(im_color, contours, -1, (0, 0, 255), 1)
