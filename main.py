@@ -14,20 +14,10 @@ print(th)
 edges = cv2.Canny(image=image, threshold1=threshold1, threshold2=threshold2)
 blur = cv2.blur(edges,(5,5))
 cv2.imwrite('qr2.png', blur)
-
+# try gaussian blur blurred_img = cv2.GaussianBlur(img, (5,5), 0)
+# bilateral filter is maybe what i exactly want. also read about filling contour gaps
 # otsu bad 170 b/w
-# pygame.init()
-# x = 500
-# y = 500
-# dsp = pygame.display.set_mode((x, y))
-# pygame.display.set_caption('QRFx')
-# img_dp = pygame.image.load("qr2.png").convert()
-# picture = pygame.transform.scale(img_dp, (x,y))
-# dsp.blit(picture, (0, 0))
-# pygame.display.flip()
-# status = True
-# while (status):
-    # for i in pygame.event.get():
-        # if i.type == pygame.QUIT:
-            # status = False
-# pygame.quit()      
+# https://answers.opencv.org/question/53548/gap-filling-contours-lines/
+# https://stackoverflow.com/questions/26586123/filling-gaps-in-shape-edges
+
+
