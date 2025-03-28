@@ -4,3 +4,7 @@ this project is not made to fix *any* broken qr image.
 i haven't taken generalization of the algo into consideration. I solely made this project to fix a qr code (single) I already had which wasn't working  
 and i wanted to fix it and have it functioning properly, also create a digitized version of it.  
 by doing this i'd learn opencv and id get even more better at python (and learn a lot). 
+
+
+## update
+binarization after 5x gaussian blur did wonders, im working on atleast 4 projects at once i think im a genius. (sarcasm but actually 4)
