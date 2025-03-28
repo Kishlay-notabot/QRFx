@@ -32,9 +32,9 @@ closed_img = cv2.morphologyEx(im_th_gray, cv2.MORPH_CLOSE, kernel)
 resized = ResizeWithAspectRatio(closed_img, width=400)
 #  ----------------------
 # resize and show image 
-cv2.imshow('test',resized)
-cv2.waitKey(8000)
-cv2.destroyAllWindows()
+cv2.imshow('erosion on binary',resized)
+cv2.waitKey(500)
+
 # image_gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 
 # print(th)
@@ -48,10 +48,9 @@ cv2.destroyAllWindows()
 edges = cv2.Canny(image=closed_img, threshold1=threshold1, threshold2=threshold2)
 
 cv2.imwrite('qr2.png', edges)
-# tried gaussian blur. FILLING is the only option. maybe
-# bilateral filter didnt work
-# white fill, floodfill.
-# otsu bad 170 b/w
+cv2.imshow('edges',resized)
+cv2.waitKey(4000)
+cv2.destroyAllWindows()
 # https://answers.opencv.org/question/53548/gap-filling-contours-lines/
 # https://stackoverflow.com/questions/26586123/filling-gaps-in-shape-edges
 # https://www.reddit.com/r/learnpython/comments/h16htq/how_to_change_all_colors_in_the_image_to_white/
