@@ -38,9 +38,11 @@ cv2.imwrite('result.png', edges) # write canny edged
 cv2.imshow('edges',ed_res)
 
 original_image = cv2.imread('source.png')
-contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+contours, _ = cv2.findContours(fn, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 qr_contour = None
+best_match_score = 0
+
 for contour in contours:
     perimeter = cv2.arcLength(contour, True)
     area = cv2.contourArea(contour)
@@ -48,13 +50,23 @@ for contour in contours:
     if area > 1000:
         approx = cv2.approxPolyDP(contour, 0.02 * perimeter, True)
         
-        if len(approx) == 4:
-            x, y, w, h = cv2.boundingRect(contour)
-            aspect_ratio = w / float(h)
-            
-            if 0.8 < aspect_ratio < 1.2:
-                qr_contour = contour
-                break
+        x, y, w, h = cv2.boundingRect(contour)
+        aspect_ratio = w / float(h)
+        
+        # Scoring criteria for QR code detection
+        match_score = 0
+        if len(approx) == 4:  # Quadrilateral
+            match_score += 50
+        
+        if 0.8 < aspect_ratio < 1.2:  # Nearly square
+            match_score += 30
+        
+        if area > 5000 and area < 100000:  # Reasonable size
+            match_score += 20
+        
+        if match_score > best_match_score:
+            best_match_score = match_score
+            qr_contour = contour
 
 if qr_contour is not None:
     cv2.drawContours(original_image, [qr_contour], -1, (0, 0, 255), 3)
@@ -72,4 +84,3 @@ cv2.destroyAllWindows()
 # im_color = cv2.cvtColor(im_th_gray, cv2.COLOR_GRAY2BGR)
 # cv2.drawContours(im_color, contours, -1, (0, 0, 255), 1)
 # th, im_th_gray = cv2.threshold(image,170,255,cv2.THRESH_BINARY)
-
