@@ -9,8 +9,7 @@ threshold2 = int(sys.argv[2]) if len(sys.argv) > 2 else 100
 #  first to binary
 th, im_th_gray = cv2.threshold(image,170,255,cv2.THRESH_BINARY)
 #  ----------------------
-# then add kernel for erosion to binary image
-kernel = np.ones((2, 2), np.uint8)
+# then add kernel for closing to binary image
 
 def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
     dim = None
@@ -28,11 +27,13 @@ def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
     return cv2.resize(image, dim, interpolation=inter)
 #  ----------------------
 # Apply morphological closing
-closed_img = cv2.morphologyEx(im_th_gray, cv2.MORPH_CLOSE, kernel)
-resized = ResizeWithAspectRatio(closed_img, width=400)
+for _ in range (5):
+    blt = cv2.bilateralFilter(im_th_gray,20,100,100)
+
+resized = ResizeWithAspectRatio(blt, width=400)
 #  ----------------------
 # resize and show image 
-cv2.imshow('erosion on binary',resized)
+cv2.imshow('closing on binary',resized)
 cv2.waitKey(500)
 
 # image_gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
@@ -45,7 +46,7 @@ cv2.waitKey(500)
 
 #  ----------------------
 # do edge detection and save file 
-edges = cv2.Canny(image=closed_img, threshold1=threshold1, threshold2=threshold2)
+edges = cv2.Canny(image=blt, threshold1=threshold1, threshold2=threshold2)
 
 cv2.imwrite('qr2.png', edges)
 cv2.imshow('edges',resized)
