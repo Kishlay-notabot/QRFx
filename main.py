@@ -27,8 +27,9 @@ def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
     return cv2.resize(image, dim, interpolation=inter)
 #  ----------------------
 # Apply morphological closing
+blt = image.copy()
 for _ in range (5):
-    blt = cv2.bilateralFilter(image,20,100,100)
+    blt = cv2.bilateralFilter(blt,20,100,100)
 
 resized = ResizeWithAspectRatio(blt, width=400)
 #  ----------------------
@@ -48,10 +49,10 @@ cv2.waitKey(500)
 # do edge detection and save file 
 th, fn = cv2.threshold(blt,170,255,cv2.THRESH_BINARY)
 edges = cv2.Canny(image=fn, threshold1=threshold1, threshold2=threshold2)
-ResizeWithAspectRatio(edges, width=400)
+ed_res = ResizeWithAspectRatio(edges, width=400)
 cv2.imwrite('qr2.png', edges)
 
-cv2.imshow('edges',edges)
+cv2.imshow('edges',ed_res)
 cv2.waitKey(4000)
 cv2.destroyAllWindows()
 # https://answers.opencv.org/question/53548/gap-filling-contours-lines/
