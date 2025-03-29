@@ -28,3 +28,4 @@ we can crop a qr code if we just get 2 out of 3 finder patterns detected.
 
 
 future additions can be then digitizing the qr code with contour polygon approximations overlayed and converting it to the nearest polygons possible and getting a decent qr code. just for the fun, I don't think it has any practical uses.
+# ALSO, please don't judge my coding skills with this (they are way worse /s), i write trash code but ay atleast it works, i skipped on the documentation part because no one else is gonna use this abomination of a code apart from me.
