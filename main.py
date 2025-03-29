@@ -55,15 +55,17 @@ cv2.imshow('dilated and closed', ResizeWithAspectRatio(closed_edges, width=400))
 contours, hierarchy = cv2.findContours(closed_edges, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 qr_decoder = cv2.QRCodeDetector()
-data, points, _ = qr_decoder.detectAndDecode(closed_edges)
+data, points, _ = qr_decoder.detectAndDecode(fn)
+
 if points is not None:
     points = points[0].astype(int)
+    image_bgr = cv2.cvtColor(fn, cv2.COLOR_GRAY2BGR)
     for i in range(len(points)):
         pt1 = tuple(points[i])
         pt2 = tuple(points[(i + 1) % len(points)])
-        cv2.line(image, pt1, pt2, (0, 255, 0), 2)
+        cv2.line(fn, pt1, pt2, (0, 255, 0), 2)
 
-qr_resized = ResizeWithAspectRatio(closed_edges, width=400)
+qr_resized = ResizeWithAspectRatio(fn, width=400)
 cv2.imshow('cvqrcode detection', qr_resized)
 result_image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
 
