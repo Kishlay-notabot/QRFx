@@ -1,10 +1,30 @@
 # QRFx - finding the best way to waste my time
-## i mean i made this for the FR8 selection round 2... a simple project
+## not a waste of time though, learnt a lot but... a project but only customized for my use case.
 this project is not made to fix *any* broken qr image.  
-i haven't taken generalization of the algo into consideration. I solely made this project to fix a qr code (single) I already had which wasn't working  
-and i wanted to fix it and have it functioning properly, also create a digitized version of it.  
-by doing this i'd learn opencv and id get even more better at python (and learn a lot). 
+i haven't taken generalization of the algo into consideration. I solely made this project to fix a qr code (single) I already had which wasn't working.  
+
+![alt text](source.png)
+> original QR code, doesn't work.   
+
+i had this qr code lying around since a few **years**... yes i had a plan to recover it since then, i was given an opportunity to do any project and implement anything for a thing i applied, so i decided to proceed with this, and i surprisingly picked up opencv quite well in just 5 days and got the qr code working.
+## technical specifications
+
+### what i tried
+i tried gaussian blur, simple blur using kernels, filters, bilateral filtering, binarization, canny edge detection, gap filling, contours, flood fill, otsu threshold too. 
+![alt text](binarized.png)
+
+> this one above works, and is scannable.
+
+### actual current pipeline (for locating it manually)
+#### these all steps are written for me to try to get an algorithm made for detecting a qr code's location in an image.
+* input (source.png) image gets read in grayscale  
+* gaussian blur is applied 5 times
+* the output gets binarized with 170 threshold 
+* then canny edge detection is applied on the binarized image
+* then a custom algo spots right angles to try and detect a qr code in the inputted image. (and cropping it)  
+we can crop a qr code if we just get 2 out of 3 finder patterns detected.
+![alt text](qr_detection.png)
 
 
-## update
-binarization after 5x gaussian blur did wonders, im working on atleast 4 projects at once i think im a genius. (sarcasm but actually 4)
+
+future additions can be then digitizing the qr code with contour polygon approximations overlayed and converting it to the nearest polygons possible and getting a decent qr code. just for the fun, I don't think it has any practical uses.

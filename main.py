@@ -36,18 +36,6 @@ edges = cv2.Canny(image=fn, threshold1=threshold1, threshold2=threshold2) # cann
 ed_res = ResizeWithAspectRatio(edges, width=400)
 cv2.imwrite('result.png', edges) # write canny edged
 cv2.imshow('edges',ed_res)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
-# https://answers.opencv.org/question/53548/gap-filling-contours-lines/
-# https://stackoverflow.com/questions/26586123/filling-gaps-in-shape-edges
-# https://www.reddit.com/r/learnpython/comments/h16htq/how_to_change_all_colors_in_the_image_to_white/
-# image_gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-# print(th)
-# contours, hierarchy = cv2.findContours(im_th_gray, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-# im_color = cv2.cvtColor(im_th_gray, cv2.COLOR_GRAY2BGR)
-# cv2.drawContours(im_color, contours, -1, (0, 0, 255), 1)
-# th, im_th_gray = cv2.threshold(image,170,255,cv2.THRESH_BINARY)
-
 kernel = np.ones((3,3), np.uint8)
 dilated_edges = cv2.dilate(edges, kernel, iterations=1)
 closed_edges = cv2.morphologyEx(dilated_edges, cv2.MORPH_CLOSE, kernel, iterations=2)
@@ -57,7 +45,6 @@ contours, hierarchy = cv2.findContours(closed_edges, cv2.RETR_LIST, cv2.CHAIN_AP
 qr_decoder = cv2.QRCodeDetector()
 data, points, _ = qr_decoder.detectAndDecode(fn)
 image_bgr = cv2.cvtColor(fn, cv2.COLOR_GRAY2BGR)
-# If the new source.png does not contain a QR code or has poor contrast, detectAndDecode(fn) will return None, skipping the image_bgr definition.
 if points is not None:
     points = points[0].astype(int)
     for i in range(len(points)):
